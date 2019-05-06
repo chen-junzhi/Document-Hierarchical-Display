@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<TITLE> ZTREE DEMO - Simple Data</TITLE>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="bootstrapStyle.css" type="text/css">
+<script src="jquery.js"></script>
+<script type="text/javascript" src="zTree.js"></script>
+<!--<script type="text/javascript" src="ztree.check.js"></script>
+<script type="text/javascript" src="ztree.edit.js"></script>-->
+<SCRIPT type="text/javascript">
+        function fCilck(event, treeId, treeNode){
+            var index = treeNode.name.lastIndexOf('.');
+            if( index !== -1 ){
+                var suffix = treeNode.name.substring(index+1) //后缀名;
+                
+            }else {
+                //点击文件夹
+                console.log("This is a dir");
+            }
+            
+        }
+        
+        var setting = {
+            view: {
+                //addHoverDom: addHoverDom,
+                removeHoverDom: removeHoverDom,
+                selectedMulti: false
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            //edit: {
+            //    enable: true
+            //}
+            callback: {
+                onClick: fCilck
+            }
+        };
+
+
+        var test_arr = [{"name":".htaccess"},{"name":"base.css"},{"name":"dengnixiake.mp3"},{"name":"dir1","children":[{"name":"1.TXT"},{"name":"dir2","children":[{"name":"2 - \u526f\u672c (2).TXT"},{"name":"2 - \u526f\u672c (3).TXT"},{"name":"2 - \u526f\u672c.TXT"},{"name":"2.TXT"},{"name":"dir3","children":[{"name":"3 - \u526f\u672c (2).TXT"},{"name":"3 - \u526f\u672c.TXT"},{"name":"3.TXT"},{"name":"dir4","children":[{"name":"4 - \u526f\u672c (2).TXT"},{"name":"4 - \u526f\u672c (3).TXT"},{"name":"4 - \u526f\u672c (4).TXT"},{"name":"4 - \u526f\u672c.TXT"},{"name":"4.TXT"}]}]}]}]},{"name":"images","children":[{"name":"css.jpg"},{"name":"dir.jpg"},{"name":"doc.jpg"},{"name":"exe.jpg"},{"name":"gif.jpg"},{"name":"htm.jpg"},{"name":"html.jpg"},{"name":"jpg.jpg"},{"name":"js.jpg"},{"name":"mp3.jpg"},{"name":"php.jpg"},{"name":"png.jpg"},{"name":"ppt.jpg"},{"name":"rar.jpg"},{"name":"txt.jpg"},{"name":"undefined.jpg"},{"name":"video.jpg"},{"name":"xls.jpg"},{"name":"zip.jpg"}]},{"name":"index - \u526f\u672c.php"},{"name":"index.html"},{"name":"index.php"},{"name":"jquery-1.6.2.min.js"},{"name":"login2.png"},{"name":"login_bg.jpg"},{"name":"main.js"},{"name":"movie.ogg"},{"name":"test.html"},{"name":"test.json"},{"name":"test4.avi"},{"name":"testcss.css"},{"name":"testdoc.doc"},{"name":"testexcel.xls"},{"name":"testgif.gif"},{"name":"testhtml.html"},{"name":"testjpg.jpg"},{"name":"testjs.js"},{"name":"testmp3.mp3"},{"name":"testphp.php"},{"name":"testpng.png"},{"name":"testrar.rar"},{"name":"testtxt.txt"},{"name":"testzip.zip"},{"name":"undefinedfile"},{"name":"\u88ab\u8df3\u8fc7\u8f93\u51fa\u6587\u4ef6.skip"},{"name":"\u811a\u672c\u4e4b\u5bb6.url"},{"name":"\u8bf4\u660e.txt"}]
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#treeDemo"), setting, test_arr);
+        });
+
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
+            if (btn) btn.bind("click", function(){
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+                return false;
+            });
+        };
+        function removeHoverDom(treeId, treeNode) {
+            $("#addBtn_"+treeNode.tId).unbind().remove();
+        };
+       
+    </SCRIPT>
+</HEAD>
+<BODY>
+<h1>zTree - bootstrap 风格</h1>
+<ul id="treeDemo" class="ztree"></ul>
+<div id="showInfo">
+    
+</div>
+<iframe></iframe>
+</BODY>
+</HTML>

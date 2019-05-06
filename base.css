@@ -1,0 +1,54 @@
+#container{
+	border: 1px solid;
+    margin: 0 auto;
+    padding: 10px;
+    width: 654px;
+	border-radius: 10px 10px 10px 10px;
+}
+#back{
+    width: 654px;
+	margin: 0 auto;
+}
+#back a{
+	line-style:none;
+}
+.file{
+	clear: both;
+	height: 2px;
+    margin-bottom: 20px;
+}
+.file img{
+	float:left;
+}
+.file a{
+	float:left;
+    margin-left: 5px;
+}
+.file div{
+	float:left;
+	width:150px;
+}
+.text-left{
+	text-align:left;
+}
+.text-center{
+	text-align:center;
+}
+.text-right{
+	text-align:right;
+}
+.border-left{
+	border-left:1px solid;
+}
+.border-right{
+	border-right:1px solid;
+}
+.file div.filename{
+	width:200px;
+}
+.file div.filesize{
+	width:100px;
+}
+.file div.filemtime{
+	width:200px;
+}
